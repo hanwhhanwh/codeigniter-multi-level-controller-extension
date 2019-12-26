@@ -34,7 +34,7 @@ class MY_Router extends CI_Router {
         }
 
         // Does the requested controller exist in the root folder?
-        if (file_exists(APPPATH.'controllers/'.$segments[0].EXT))
+        if (file_exists(APPPATH.'controllers/'.$segments[0] . 'php'))
         {
             return $segments;
         }
@@ -45,23 +45,23 @@ class MY_Router extends CI_Router {
             // @edit: Support multi-level sub-folders
             $dir = '';
             
-			do
+            do
             {
                 if (strlen($dir) > 0)
                 {
                     $dir .= '/';
                 }
                 
-				$dir .= $segments[0];
+                $dir .= $segments[0];
                 $segments = array_slice($segments, 1);
             } while (count($segments) > 0 && is_dir(APPPATH.'controllers/'.$dir.'/'.$segments[0]));
            
- 			// Set the directory and remove it from the segment array
+            // Set the directory and remove it from the segment array
             $this->set_directory($dir);
             // @edit: END
 
             // @edit: If no controller found, use 'default_controller' as defined in 'config/routes.php'
-            if (count($segments) > 0 && ! file_exists(APPPATH.'controllers/'.$this->fetch_directory().$segments[0].EXT))
+            if (count($segments) > 0 && ! file_exists(APPPATH.'controllers/'.$this->fetch_directory().$segments[0] . 'php'))
             {
                 array_unshift($segments, $this->default_controller);
             }
@@ -70,7 +70,7 @@ class MY_Router extends CI_Router {
             if (count($segments) > 0)
             {
                 // Does the requested controller exist in the sub-folder?
-                if (!file_exists(APPPATH.'controllers/'.$this->fetch_directory().$segments[0].EXT))
+                if (!file_exists(APPPATH.'controllers/'.$this->fetch_directory().$segments[0] . 'php'))
                 {
                     // show_404($this->fetch_directory().$segments[0]);
                     // @edit: Fix a "bug" where show_404 is called before all the core classes are loaded
@@ -95,7 +95,7 @@ class MY_Router extends CI_Router {
                 }
 
                 // Does the default controller exist in the sub-folder?
-                if (!file_exists(APPPATH.'controllers/'.$this->fetch_directory().$this->default_controller.EXT))
+                if (!file_exists(APPPATH.'controllers/'.$this->fetch_directory().$this->default_controller . 'php'))
                 {
                     $this->directory = '';
                     return array();
@@ -133,9 +133,9 @@ class MY_Router extends CI_Router {
      * @param    string
      * @return    void
      */
-    function set_directory($dir)
+    function set_directory($dir, $append = false)
     {
-        $this->directory = str_replace(array('.'), '', $dir).'/'; // @edit: Preserve '/'
+        $this->directory = $dir . '/'; // @edit: Preserve '/'
     }
 
     // --------------------------------------------------------------------
