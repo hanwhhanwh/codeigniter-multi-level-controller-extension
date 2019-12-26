@@ -1,12 +1,19 @@
-Multi level controllers extension - Production ready - CI 2.1.0 compatible
-====================================================================
+Multi level controllers extension - Production ready - CI 3.1.10 compatible
+===========================================================================
 
 An extension to the core router class to allow controllers to be in multi-level directories.
+
+Usage
+-----
+
+Copy "MY_Router.php" into "application/core" folder.
+
 
 Notes
 -----
 
 This original extension was written by Damien K. but the code appeared to have no home. 
+
 
 Extra
 -----
